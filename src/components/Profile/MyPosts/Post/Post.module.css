@@ -1,0 +1,13 @@
+.content {
+
+    grid-area: c;
+    background-color: antiquewhite;
+}
+.item {
+    color: #006262;
+}
+.item img{
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+}
