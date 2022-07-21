@@ -4,7 +4,10 @@ import s from './Navbar.module.css'
 export const Navbar = () => {
     return(
         <nav className={s.nav}>
-            <div className={`${s.item} ${s.active}`}>
+            <div className={`${s.item} ${s.active}`}
+
+
+            >
                 <a>Profile</a>
             </div>
             <div className={s.item}>
