@@ -9,21 +9,49 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 
-export const App = () => {
+export type PostPropsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+export type DialogType = {
+    id: number
+    name: string
+}
+export type MessageType = {
+    id: number
+    message: string
+}
+
+export type PostsPropsType = {
+    posts: Array<PostPropsType>
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+}
+export type StatePropsType = {
+    state: PostsPropsType
+}
+
+
+export const App = (props: StatePropsType) => {
+
     return (
-        <BrowserRouter>
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                    <Route path={"/profile"} component={Profile}/>
-                    <Route path={"/dialogs"} component={Dialogs}/>
-                    <Route path={"/news"} component={News}/>
-                    <Route path={"/music"} component={Music}/>
-                    <Route path={"/settings"} component={Settings}/>
-                </div>
+
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar/>
+            <div className='app-wrapper-content'>
+
+                <Route path={"/profile"} render={() => <Profile posts={props.state.posts}/>}/>
+                <Route path={"/dialogs"}
+                       render={() => <Dialogs dialogs={props.state.dialogs} messages={props.state.messages}/>}/>
+                <Route path={"/news"} render={() => <News/>}/>
+                <Route path={"/music"} render={() => <Music/>}/>
+                <Route path={"/settings"} render={() => <Settings/>}/>
             </div>
-        </BrowserRouter>
+        </div>
+
 
     );
 }
