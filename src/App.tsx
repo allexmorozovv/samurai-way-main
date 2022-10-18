@@ -4,7 +4,7 @@ import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
@@ -15,22 +15,31 @@ export type PostPropsType = {
     likesCount: number
 }
 
-export type DialogType = {
+export type DialogItemPropsType = {
     id: number
     name: string
 }
-export type MessageType = {
+export type MessagePropsType = {
     id: number
     message: string
 }
-
 export type PostsPropsType = {
     posts: Array<PostPropsType>
-    dialogs: Array<DialogType>
-    messages: Array<MessageType>
+}
+
+export type DialogsPropsType = {
+    dialogs: Array<DialogItemPropsType>
+    messages: Array<MessagePropsType>
+}
+
+
+export type AllPropsType = {
+    posts: Array<PostPropsType>
+    dialogs: Array<DialogItemPropsType>
+    messages: Array<MessagePropsType>
 }
 export type StatePropsType = {
-    state: PostsPropsType
+    state: AllPropsType
 }
 
 
