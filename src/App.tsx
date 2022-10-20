@@ -8,42 +8,11 @@ import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-
-export type PostPropsType = {
-    id: number
-    message: string
-    likesCount: number
-}
-
-export type DialogItemPropsType = {
-    id: number
-    name: string
-}
-export type MessagePropsType = {
-    id: number
-    message: string
-}
-export type PostsPropsType = {
-    posts: Array<PostPropsType>
-}
-
-export type DialogsPropsType = {
-    dialogs: Array<DialogItemPropsType>
-    messages: Array<MessagePropsType>
-}
-
-
-export type AllPropsType = {
-    posts: Array<PostPropsType>
-    dialogs: Array<DialogItemPropsType>
-    messages: Array<MessagePropsType>
-}
-export type StatePropsType = {
-    state: AllPropsType
-}
+import {StatePropsType} from "./Redux/state";
 
 
 export const App = (props: StatePropsType) => {
+
 
     return (
 
