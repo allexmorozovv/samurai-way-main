@@ -1,4 +1,58 @@
-export let state = {
+import {rerenderTree} from "../render";
+
+export type PostPropsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+export type DialogItemPropsType = {
+    id: number
+    name: string
+}
+export type MessagePropsType = {
+    id: number
+    message: string
+}
+export type PostsPropsType = {
+    posts: Array<PostPropsType>
+    addPost:(postText:string)=>void
+}
+
+export type DialogsPropsType = {
+    dialogs: Array<DialogItemPropsType>
+    messages: Array<MessagePropsType>
+}
+
+
+export type AllPropsType = {
+    posts: Array<PostPropsType>
+    dialogs: Array<DialogItemPropsType>
+    messages: Array<MessagePropsType>
+}
+export type StatePropsType = {
+    state: AllPropsType
+    addPost:(postText:string)=>void
+}
+
+
+
+export const addPost=(postText:string)=>{
+    const newPost:PostPropsType={
+        id:new Date().getTime(),
+        message:postText,
+        likesCount:0
+    }
+    state.posts.push(newPost)
+    rerenderTree(state)
+}
+
+
+
+
+
+
+export let state :AllPropsType = {
     posts: [
         {id: 1, message: "Hi, how are you", likesCount: 15},
         {id: 2, message: "It's my first post", likesCount: 25},
@@ -17,47 +71,4 @@ export let state = {
         {id: 1, message: "Yo!"},
         {id: 1, message: "Yo!"},
     ],
-}
-
-export const addPost = () => {
-
-}
-
-export type AddPostType = {
-    addPost: () => void
-}
-
-
-export type PostPropsType = {
-    id: number
-    message: string
-    likesCount: number
-}
-
-export type DialogItemPropsType = {
-    id: number
-    name: string
-}
-export type MessagePropsType = {
-    id: number
-    message: string
-}
-export type PostsPropsType = {
-    posts: Array<PostPropsType>
-}
-
-export type DialogsPropsType = {
-    dialogs: Array<DialogItemPropsType>
-    messages: Array<MessagePropsType>
-}
-
-
-export type AllPropsType = {
-    posts: Array<PostPropsType>
-    dialogs: Array<DialogItemPropsType>
-    messages: Array<MessagePropsType>
-}
-export type StatePropsType = {
-    state: AllPropsType
-
 }
