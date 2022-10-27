@@ -4,6 +4,7 @@ export type PostPropsType = {
     id: number
     message: string
     likesCount: number
+
 }
 
 export type DialogItemPropsType = {
@@ -16,7 +17,9 @@ export type MessagePropsType = {
 }
 export type PostsPropsType = {
     posts: Array<PostPropsType>
-    addPost:(postText:string)=>void
+    addPost: () => void
+    newPostText: string
+    updateNewPostText: (newText: string) => void
 }
 
 export type DialogsPropsType = {
@@ -29,36 +32,42 @@ export type AllPropsType = {
     posts: Array<PostPropsType>
     dialogs: Array<DialogItemPropsType>
     messages: Array<MessagePropsType>
+    newPostText: string
+
 }
 export type StatePropsType = {
     state: AllPropsType
-    addPost:(postText:string)=>void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
 
-
-export const addPost=(postText:string)=>{
-    const newPost:PostPropsType={
-        id:new Date().getTime(),
-        message:postText,
-        likesCount:0
+export const addPost = () => {
+    const newPost: PostPropsType = {
+        id: new Date().getTime(),
+        message: state.newPostText,
+        likesCount: 0
     }
     state.posts.push(newPost)
+    state.newPostText = ""
+    rerenderTree(state)
+}
+
+export const updateNewPostText = (newText: string) => {
+
+    state.newPostText = newText
     rerenderTree(state)
 }
 
 
-
-
-
-
-export let state :AllPropsType = {
+export let state: AllPropsType = {
     posts: [
         {id: 1, message: "Hi, how are you", likesCount: 15},
         {id: 2, message: "It's my first post", likesCount: 25},
         {id: 3, message: "Yo!", likesCount: 15},
         {id: 4, message: "Yo!", likesCount: 15},
     ],
+    newPostText: "",
     dialogs: [
         {id: 1, name: "Alex"},
         {id: 2, name: "Kris"},
