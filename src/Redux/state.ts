@@ -1,4 +1,6 @@
-import {rerenderTree} from "../render";
+let rerender = () => {
+    console.log('remont')
+}
 
 export type PostPropsType = {
     id: number
@@ -50,13 +52,17 @@ export const addPost = () => {
     }
     state.posts.push(newPost)
     state.newPostText = ""
-    rerenderTree(state)
+    rerender()
 }
 
 export const updateNewPostText = (newText: string) => {
 
     state.newPostText = newText
-    rerenderTree(state)
+    rerender()
+}
+
+export const subscribe = (observer: () => void) => {
+    rerender = observer
 }
 
 
