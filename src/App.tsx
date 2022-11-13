@@ -8,10 +8,10 @@ import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {RootStateType, state} from "./Redux/state";
+import {MainStateType,  state} from "./Redux/state";
 
 
-export const App = (props: RootStateType) => {
+export const App = (props: MainStateType) => {
 
 
     return (
