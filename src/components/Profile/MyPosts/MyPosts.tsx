@@ -9,6 +9,11 @@ export const MyPosts = (props: ProfileMessagesType) => {
     let postsElements = props.posts.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
+    const addPostHandler = () => {
+        let text = newPostElement.current?.value
+        alert(text)
+    }
+
 
     return (
         <div className={s.content}>
@@ -21,7 +26,7 @@ export const MyPosts = (props: ProfileMessagesType) => {
                         <textarea ref={newPostElement}></textarea>
                     </div>
                     <div>
-                        <button>Add post</button>
+                        <button onClick={addPostHandler}>Add post</button>
                         <button>Remove</button>
                     </div>
 
