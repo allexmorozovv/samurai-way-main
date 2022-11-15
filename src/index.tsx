@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {App} from './App';
 import {BrowserRouter} from "react-router-dom";
-import {state, subscribe} from "./Redux/state";
+import { store} from "./Redux/state";
 
 
 const rerenderTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state}/>
+            <App store={store}/>
         </BrowserRouter>,
         document.getElementById('root')
     );
 }
 
 rerenderTree()
-subscribe(rerenderTree)
+store.subscribe(rerenderTree)

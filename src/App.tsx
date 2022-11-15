@@ -8,7 +8,7 @@ import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {addPost, MainStateType, updateNewPostText} from "./Redux/state";
+import {MainStateType} from "./Redux/state";
 
 
 export const App = (props: MainStateType) => {
@@ -21,14 +21,14 @@ export const App = (props: MainStateType) => {
             <div className='app-wrapper-content'>
 
                 <Route path={"/profile"}
-                       render={() => <Profile newPostText={props.state.profilePage.newPostText}
-                                              posts={props.state.profilePage.posts}
-                                              addPost={addPost}
-                                              updateNewPostText={updateNewPostText}
+                       render={() => <Profile newPostText={props.store.getState().profilePage.newPostText}
+                                              posts={props.store.getState().profilePage.posts}
+                                              addPost={props.store.addPost.bind(props.store)}
+                                              updateNewPostText={props.store.updateNewPostText.bind(props.store)}
                        />}/>
                 <Route path={"/dialogs"}
-                       render={() => <Dialogs dialogs={props.state.dialogsPage.dialogs}
-                                              messages={props.state.dialogsPage.messages}/>}/>
+                       render={() => <Dialogs dialogs={props.store.getState().dialogsPage.dialogs}
+                                              messages={props.store.getState().dialogsPage.messages}/>}/>
                 <Route path={"/news"} render={() => <News/>}/>
                 <Route path={"/music"} render={() => <Music/>}/>
                 <Route path={"/settings"} render={() => <Settings/>}/>
