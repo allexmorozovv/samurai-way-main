@@ -1,19 +1,27 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {ProfileMessagesType} from "../../../Redux/state";
+import {ProfileType} from "../../../Redux/state";
 
 
-export const MyPosts = (props: ProfileMessagesType) => {
+export const MyPosts = (props: ProfileType) => {
 
     let postsElements = props.posts.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPostHandler = () => {
-        let text = newPostElement.current?.value
-        alert(text)
-    }
 
+            props.addPost()
+           props.updateNewPostText('')
+
+    }
+    const onPostChangeHandler = () => {
+        if (newPostElement.current){
+            props.updateNewPostText(newPostElement.current.value)
+
+        }
+
+    }
 
     return (
         <div className={s.content}>
@@ -23,7 +31,7 @@ export const MyPosts = (props: ProfileMessagesType) => {
                 <div>
 
                     <div>
-                        <textarea ref={newPostElement}></textarea>
+                        <textarea onChange={onPostChangeHandler} ref={newPostElement}/>
                     </div>
                     <div>
                         <button onClick={addPostHandler}>Add post</button>

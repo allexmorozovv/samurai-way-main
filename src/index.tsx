@@ -4,17 +4,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {App} from './App';
 import {BrowserRouter} from "react-router-dom";
-import {state, subscribe} from "./Redux/state";
+import {addPost, state, subscribe} from "./Redux/state";
+import {rerenderTree} from "./render";
 
 
-export const rerenderTree = () => {
+/*export const rerenderTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state}/>
+            <App state={state} />
         </BrowserRouter>,
         document.getElementById('root')
     );
-}
+}*/
 
-rerenderTree()
-subscribe(rerenderTree)
+rerenderTree(state)
+// subscribe(rerenderTree)
