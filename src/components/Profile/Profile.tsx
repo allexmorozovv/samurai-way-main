@@ -9,7 +9,6 @@ import {ProfileType} from "../../Redux/state";
     posts:Array<PostType>
 }*/
 
-
 export const Profile: React.FC<ProfileType> = (props) => {
 
     return (

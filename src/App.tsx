@@ -13,7 +13,6 @@ import {addPost, MainStateType, updateNewPostText} from "./Redux/state";
 
 export const App = (props: MainStateType) => {
 
-
     return (
 
         <div className='app-wrapper'>
@@ -35,8 +34,6 @@ export const App = (props: MainStateType) => {
                 <Route path={"/settings"} render={() => <Settings/>}/>
             </div>
         </div>
-
-
     );
 }
 

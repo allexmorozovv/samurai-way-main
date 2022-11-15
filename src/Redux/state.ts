@@ -1,9 +1,9 @@
-import {rerenderTree} from "../render";
 
 export type MessageType = {
     id: number
     message: string
 }
+
 export type DialogType = {
     id: number
     name: string
@@ -38,22 +38,12 @@ export type ProfileType = {
     posts: Array<PostType>
     addPost: () => void
     updateNewPostText: (newText: string) => void
-
 }
-
 
 export type MainStateType = {
     state: RootStateType
 }
 
-
-let render = () => {
-    console.log('hey')
-}
-
-export const subscribe = (observer: () => void) => {
-    render = observer
-}
 
 export let state: RootStateType = {
     profilePage: {
@@ -81,15 +71,30 @@ export let state: RootStateType = {
     },
     sidebar: {}
 }
+
+
+let render = () => {
+    console.log('hey')
+}
+
+export const subscribe = (observer: () => void) => {
+    render = observer
+}
+
 export const addPost = () => {
-    const newPost: PostType = {id: new Date().getTime(), message: state.profilePage.newPostText, likesCount: 0}
+    const newPost: PostType = {
+        id: new Date().getTime(),
+        message: state.profilePage.newPostText,
+        likesCount: 0
+    }
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = ""
-    rerenderTree(state)
+    render()
 }
+
 export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
-    rerenderTree(state)
+    render()
 }
 
 
