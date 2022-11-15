@@ -1,9 +1,9 @@
 import React, {FC} from "react";
 import s from "./../Dialogs.module.css"
-import {MessagePropsType} from "../../../redux/state";
+import {MessageType} from "../../../Redux/state";
 
 
-export const Message: React.FC<MessagePropsType> = (props) => {
+export const Message: React.FC<MessageType> = (props) => {
     return (
         <div className={s.message}>
 
@@ -11,7 +11,9 @@ export const Message: React.FC<MessagePropsType> = (props) => {
             <div>
                 <textarea></textarea>
             </div>
-            <div><button>add message</button></div>
+            <div>
+                <button>add message</button>
+            </div>
 
         </div>
 
