@@ -10,17 +10,12 @@ export const MyPosts = (props: ProfileType) => {
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPostHandler = () => {
-
             props.addPost()
-           props.updateNewPostText('')
-
     }
     const onPostChangeHandler = () => {
         if (newPostElement.current){
-            props.updateNewPostText(newPostElement.current.value)
-
+            props.updateNewPostText(newPostElement.current?.value)
         }
-
     }
 
     return (
@@ -31,7 +26,7 @@ export const MyPosts = (props: ProfileType) => {
                 <div>
 
                     <div>
-                        <textarea onChange={onPostChangeHandler} ref={newPostElement}/>
+                        <textarea onChange={onPostChangeHandler} ref={newPostElement} value={props.newPostText}/>
                     </div>
                     <div>
                         <button onClick={addPostHandler}>Add post</button>
