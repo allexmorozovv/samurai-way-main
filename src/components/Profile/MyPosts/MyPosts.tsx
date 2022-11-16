@@ -9,11 +9,11 @@ export const MyPosts = (props: ProfileType) => {
     let postsElements = props.posts.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     const addPostHandler = () => {
-        props.addPost()
+        props.dispatch({type:"ADD-POST"})
     }
 
     const onPostChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostText(e.currentTarget.value)
+        props.dispatch({type:"UPDATE-NEW-POST-TEXT",newText:e.currentTarget.value})
     }
 
     return (

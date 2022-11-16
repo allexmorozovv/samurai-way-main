@@ -35,8 +35,7 @@ export type RootStateType = {
 export type ProfileType = {
     newPostText: string
     posts: Array<PostType>
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionTypes) => void
 }
 
 export type MainStateType = {
@@ -48,10 +47,22 @@ export type MainStateType = {
 export type StoreType = {
     _state: RootStateType
     _render: () => void
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    // addPost: () => void
+    // updateNewPostText: (newText: string) => void
     subscribe: (observer: () => void) => void
     getState: () => RootStateType
+    dispatch: (action: ActionTypes) => void
+}
+
+export type ActionTypes = AddPostActionType | UpdateNewPostTextActionType
+
+export type AddPostActionType = {
+    type: 'ADD-POST',
+    // newPostText: string
+}
+type UpdateNewPostTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: string
 }
 
 export const store: StoreType = {
@@ -82,30 +93,51 @@ export const store: StoreType = {
         sidebar: {}
     },
 
-    addPost() {
-        const newPost: PostType = {
-            id: new Date().getTime(),
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ""
-        this._render()
-    },
-
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText
-        this._render()
-    },
     _render() {
         console.log('hey')
     },
+
+    getState() {
+        return this._state
+    },
+
     subscribe(observer) {
         this._render = observer
     },
-    getState() {
-        return this._state
+
+    // addPost() {
+    //     const newPost: PostType = {
+    //         id: new Date().getTime(),
+    //         message: this._state.profilePage.newPostText,
+    //         likesCount: 0
+    //     }
+    //     this._state.profilePage.posts.push(newPost)
+    //     this._state.profilePage.newPostText = ""
+    //     this._render()
+    // },
+    //
+    // updateNewPostText(newText: string) {
+    //     this._state.profilePage.newPostText = newText
+    //     this._render()
+    // },
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost: PostType = {
+                id: new Date().getTime(),
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ""
+            this._render()
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._render()
+        }
     }
+
+
 }
 
 

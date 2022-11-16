@@ -21,8 +21,7 @@ export const App = (props: MainStateType) => {
                 <Route path={"/profile"}
                        render={() => <Profile newPostText={props.store.getState().profilePage.newPostText}
                                               posts={props.store.getState().profilePage.posts}
-                                              addPost={props.store.addPost.bind(props.store)}
-                                              updateNewPostText={props.store.updateNewPostText.bind(props.store)}
+                                              dispatch={props.store.dispatch.bind(props.store)}
                        />}/>
                 <Route path={"/dialogs"}
                        render={() => <Dialogs dialogs={props.store.getState().dialogsPage.dialogs}

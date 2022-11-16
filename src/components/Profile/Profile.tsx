@@ -16,8 +16,8 @@ export const Profile: React.FC<ProfileType> = (props) => {
             <ProfileInfo/>
             <MyPosts newPostText={props.newPostText}
                      posts={props.posts}
-                     addPost={props.addPost}
-                     updateNewPostText={props.updateNewPostText}/>
+                     dispatch={props.dispatch}
+            />
         </div>
     )
 }
