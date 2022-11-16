@@ -39,7 +39,6 @@ export type ProfileType = {
 }
 
 export type MainStateType = {
-    // state: RootStateType
     store: StoreType
 }
 
@@ -54,15 +53,24 @@ export type StoreType = {
     dispatch: (action: ActionTypes) => void
 }
 
-export type ActionTypes = AddPostActionType | UpdateNewPostTextActionType
+export type ActionTypes = AddPostActionType|UpdateNewPostTextActionType
 
-export type AddPostActionType = {
-    type: 'ADD-POST',
-    // newPostText: string
+export type AddPostActionType = ReturnType<typeof addPostAC>
+
+type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostAC>
+
+
+export const addPostAC = () => {
+    return {
+        type: 'ADD-POST'
+    }as const
 }
-type UpdateNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT',
-    newText: string
+
+export const updateNewPostAC = (newText: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText: newText
+    } as const
 }
 
 export const store: StoreType = {
@@ -136,8 +144,6 @@ export const store: StoreType = {
             this._render()
         }
     }
-
-
 }
 
 
