@@ -17,11 +17,20 @@ export type PostType = {
 export type ProfileMessagesType = {
     newPostText: string
     posts: Array<PostType>
+
 }
 
-export type DialogsPageType = {
+ type DialogsPageType = {
+    newMessageText: string
     dialogs: Array<DialogType>
     messages: Array<MessageType>
+
+}
+export type DialogsType={
+    newMessageText: string
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+    dispatch: (action: ActionTypes) => void
 }
 
 export type SidebarType = {}
@@ -53,7 +62,11 @@ export type StoreType = {
     dispatch: (action: ActionTypes) => void
 }
 
-export type ActionTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostAC>
+export type ActionTypes =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostAC>
+    | ReturnType<typeof updateNewMessageTextAC>
+    | ReturnType<typeof sendNewMessageTextAC>
 
 export const addPostAC = () => {
     return {
@@ -68,6 +81,17 @@ export const updateNewPostAC = (newText: string) => {
     } as const
 }
 
+export const updateNewMessageTextAC = (newTextBody: string) => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE-TEXT',
+        newTextBody: newTextBody
+    } as const
+}
+export const sendNewMessageTextAC = () => {
+    return {
+        type: 'SEND-MESSAGE-TEXT',
+    } as const
+}
 
 export const store: StoreType = {
     _state: {
@@ -92,7 +116,8 @@ export const store: StoreType = {
                 {id: 1, message: "How are you?"},
                 {id: 1, message: "Yo!"},
                 {id: 1, message: "Yo!"},
-            ]
+            ],
+            newMessageText: ""
         },
         sidebar: {}
     },
@@ -137,6 +162,17 @@ export const store: StoreType = {
             this._render()
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newText
+            this._render()
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state.dialogsPage.newMessageText = action.newTextBody
+            this._render()
+        } else if(action.type==='SEND-MESSAGE-TEXT'){
+            const newMessage:MessageType={
+                id:new Date().getTime(),
+                message:this._state.dialogsPage.newMessageText
+            }
+            this._state.dialogsPage.messages.push(newMessage)
+            this._state.dialogsPage.newMessageText=""
             this._render()
         }
     }
