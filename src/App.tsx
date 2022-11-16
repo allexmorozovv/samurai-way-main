@@ -25,7 +25,11 @@ export const App = (props: MainStateType) => {
                        />}/>
                 <Route path={"/dialogs"}
                        render={() => <Dialogs dialogs={props.store.getState().dialogsPage.dialogs}
-                                              messages={props.store.getState().dialogsPage.messages}/>}/>
+                                              messages={props.store.getState().dialogsPage.messages}
+                                              newMessageText={props.store.getState().dialogsPage.newMessageText}
+                                              dispatch={props.store.dispatch.bind(props.store)}
+
+                       />}/>
                 <Route path={"/news"} render={() => <News/>}/>
                 <Route path={"/music"} render={() => <Music/>}/>
                 <Route path={"/settings"} render={() => <Settings/>}/>
