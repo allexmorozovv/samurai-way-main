@@ -21,7 +21,6 @@ export type PostType = {
 export type ProfileMessagesType = {
     newPostText: string
     posts: Array<PostType>
-
 }
 
 export type DialogsPageType = {
@@ -51,17 +50,16 @@ export type ProfileType = {
     dispatch: (action: ActionTypes) => void
 }
 
-export type MainStateType = {
-    store: StoreType
-}
-
-
 export type StoreType = {
     _state: RootStateType
     _render: () => void
     subscribe: (observer: () => void) => void
     getState: () => RootStateType
     dispatch: (action: ActionTypes) => void
+}
+
+export type MainStateType = {
+    store: StoreType
 }
 
 export type ActionTypes =
