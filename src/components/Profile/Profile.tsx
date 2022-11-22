@@ -2,7 +2,7 @@ import React from "react";
 import s from './Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ProfileType} from "../../Redux/state";
+import {ProfileType} from "../../redux/state";
 
 /*export type ProfileType={
     addPost:(postMessage: string)=>void
