@@ -1,3 +1,7 @@
+import {addPostAC, profileReducer, updateNewPostAC} from "./profileReducer";
+import {dialogsReducer, sendNewMessageTextAC, updateNewMessageTextAC} from "./dialogsReducer";
+import {sidebarReducer} from "./sidebarReducer";
+
 export type MessageType = {
     id: number
     message: string
@@ -20,13 +24,13 @@ export type ProfileMessagesType = {
 
 }
 
- type DialogsPageType = {
+export type DialogsPageType = {
     newMessageText: string
     dialogs: Array<DialogType>
     messages: Array<MessageType>
 
 }
-export type DialogsType={
+export type DialogsType = {
     newMessageText: string
     dialogs: Array<DialogType>
     messages: Array<MessageType>
@@ -55,8 +59,6 @@ export type MainStateType = {
 export type StoreType = {
     _state: RootStateType
     _render: () => void
-    // addPost: () => void
-    // updateNewPostText: (newText: string) => void
     subscribe: (observer: () => void) => void
     getState: () => RootStateType
     dispatch: (action: ActionTypes) => void
@@ -68,30 +70,8 @@ export type ActionTypes =
     | ReturnType<typeof updateNewMessageTextAC>
     | ReturnType<typeof sendNewMessageTextAC>
 
-export const addPostAC = () => {
-    return {
-        type: 'ADD-POST'
-    } as const
-}
 
-export const updateNewPostAC = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText
-    } as const
-}
 
-export const updateNewMessageTextAC = (newTextBody: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        newTextBody: newTextBody
-    } as const
-}
-export const sendNewMessageTextAC = () => {
-    return {
-        type: 'SEND-MESSAGE-TEXT',
-    } as const
-}
 
 export const store: StoreType = {
     _state: {
@@ -134,49 +114,16 @@ export const store: StoreType = {
         this._render = observer
     },
 
-    // addPost() {
-    //     const newPost: PostType = {
-    //         id: new Date().getTime(),
-    //         message: this._state.profilePage.newPostText,
-    //         likesCount: 0
-    //     }
-    //     this._state.profilePage.posts.push(newPost)
-    //     this._state.profilePage.newPostText = ""
-    //     this._render()
-    // },
-    //
-    // updateNewPostText(newText: string) {
-    //     this._state.profilePage.newPostText = newText
-    //     this._render()
-    // },
-
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            const newPost: PostType = {
-                id: new Date().getTime(),
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ""
-            this._render()
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText
-            this._render()
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._state.dialogsPage.newMessageText = action.newTextBody
-            this._render()
-        } else if(action.type==='SEND-MESSAGE-TEXT'){
-            const newMessage:MessageType={
-                id:new Date().getTime(),
-                message:this._state.dialogsPage.newMessageText
-            }
-            this._state.dialogsPage.messages.push(newMessage)
-            this._state.dialogsPage.newMessageText=""
-            this._render()
-        }
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+
+        this._render()
     }
 }
+
 
 
 
