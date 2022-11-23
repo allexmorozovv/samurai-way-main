@@ -1,6 +1,4 @@
-import React, {ChangeEvent} from "react";
-import s from './MyPosts.module.css'
-import {Post} from "./Post/Post";
+import React from "react";
 import {ProfileType} from "../../../redux/store";
 import {addPostAC, updateNewPostAC} from "../../../redux/profileReducer";
 import {MyPosts} from "./MyPosts";
