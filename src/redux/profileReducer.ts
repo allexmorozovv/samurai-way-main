@@ -1,23 +1,23 @@
-import {ActionTypes, PostType, ProfileMessagesType} from "./store";
+import {sendNewMessageTextAC, updateNewMessageTextAC} from "./dialogsReducer";
 
-
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-
-export const addPostAC = () => {
-    return {
-        type: 'ADD-POST',
-
-    } as const
+export type PostType = {
+    id: number
+    message: string
+    likesCount: number
 }
 
-export const updateNewPostAC = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText
-    } as const
+export type ProfilePageType = {
+    newPostText: string
+    posts: Array<PostType>
 }
-let initialState = {
+
+export type ActionTypes =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostAC>
+    | ReturnType<typeof updateNewMessageTextAC>
+    | ReturnType<typeof sendNewMessageTextAC>
+
+const initialState: ProfilePageType = {
     newPostText: '',
     posts: [
         {id: 1, message: "Hi, how are you", likesCount: 15},
@@ -28,18 +28,32 @@ let initialState = {
 }
 
 
-export const profileReducer = (state: ProfileMessagesType = initialState, action: ActionTypes) => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionTypes): ProfilePageType => {
     switch (action.type) {
-        case ADD_POST:
+        case  "ADD-POST":
             const newPost: PostType = {
                 id: new Date().getTime(),
                 message: state.newPostText,
                 likesCount: 0
             }
             return {...state, posts: [...state.posts, newPost], newPostText: ""};
-        case UPDATE_NEW_POST_TEXT:
+        case "UPDATE-NEW-POST-TEXT":
             return {...state, newPostText: action.newText}
         default:
             return state
     }
+}
+
+export const addPostAC = () => {
+    return {
+        type: "ADD-POST",
+
+    } as const
+}
+
+export const updateNewPostAC = (newText: string) => {
+    return {
+        type: "UPDATE-NEW-POST-TEXT",
+        newText: newText
+    } as const
 }

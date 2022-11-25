@@ -2,34 +2,34 @@ import {addPostAC, profileReducer, updateNewPostAC} from "./profileReducer";
 import {dialogsReducer, sendNewMessageTextAC, updateNewMessageTextAC} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 
-export type MessageType = {
+type MessageType = {
     id: number
     message: string
 }
 
-export type DialogType = {
+type DialogType = {
     id: number
     name: string
 }
 
-export type PostType = {
+type PostType = {
     id: number
     message: string
     likesCount: number
 }
 
-export type ProfileMessagesType = {
+type ProfileMessagesType = {
     newPostText: string
     posts: Array<PostType>
 }
 
-export type DialogsPageType = {
+type DialogsPageType = {
     newMessageText: string
     dialogs: Array<DialogType>
     messages: Array<MessageType>
 
 }
-export type DialogsType = {
+type DialogsType = {
     newMessageText: string
     dialogs: Array<DialogType>
     messages: Array<MessageType>
@@ -38,13 +38,13 @@ export type DialogsType = {
 
 export type SidebarType = {}
 
-export type RootStateType = {
+type RootStateType = {
     profilePage: ProfileMessagesType
     dialogsPage: DialogsPageType
     sidebar: SidebarType
 }
 
-export type ProfileType = {
+type ProfileType = {
     newPostText: string
     posts: Array<PostType>
     dispatch: (action: ActionTypes) => void
@@ -58,20 +58,18 @@ export type StoreType = {
     dispatch: (action: ActionTypes) => void
 }
 
-export type MainStateType = {
+type MainStateType = {
     store: StoreType
 }
 
-export type ActionTypes =
+type ActionTypes =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof updateNewPostAC>
     | ReturnType<typeof updateNewMessageTextAC>
     | ReturnType<typeof sendNewMessageTextAC>
 
 
-
-
-export const store: StoreType = {
+const store: StoreType = {
     _state: {
         profilePage: {
             newPostText: '',

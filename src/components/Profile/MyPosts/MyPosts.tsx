@@ -1,17 +1,10 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {ProfileMessagesType} from "../../../redux/store";
+import {MyPostsPropsType} from "./MyPostsContainer";
 
 
- type MyPostsType = {
-    profilePage:ProfileMessagesType
-    addPost: () => void
-    onPostChange: (newText: string) => void
-}
-
-
-export const MyPosts = (props:MyPostsType) => {
+export const MyPosts = (props:MyPostsPropsType) => {
 
     let postsElements = props.profilePage.posts.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
 
