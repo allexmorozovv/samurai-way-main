@@ -3,7 +3,6 @@ import {profileReducer} from "./profileReducer";
 import {dialogsReducer} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {legacy_createStore as createStore} from 'redux'
-import {StoreType} from "./store";
 
 
 let rootReducer = combineReducers({
@@ -12,4 +11,4 @@ let rootReducer = combineReducers({
     sidebar: sidebarReducer
 })
 
-export let store: StoreType = createStore(rootReducer)
+export let store = createStore(rootReducer)

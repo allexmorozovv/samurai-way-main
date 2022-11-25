@@ -6,7 +6,8 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 
 export const addPostAC = () => {
     return {
-        type: 'ADD-POST'
+        type: 'ADD-POST',
+
     } as const
 }
 
