@@ -1,4 +1,3 @@
-import {SidebarType} from "./store";
 import {addPostAC, updateNewPostAC} from "./profileReducer";
 import {sendNewMessageTextAC, updateNewMessageTextAC} from "./dialogsReducer";
 
@@ -8,7 +7,9 @@ export type ActionTypes =
     | ReturnType<typeof updateNewMessageTextAC>
     | ReturnType<typeof sendNewMessageTextAC>
 
-let initialState = {}
+export type SidebarType = {}
+
+let initialState:SidebarType = {}
 
 export const sidebarReducer = (state: SidebarType = initialState, action: ActionTypes) => {
     return state
