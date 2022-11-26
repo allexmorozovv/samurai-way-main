@@ -36,7 +36,7 @@ type DialogsType = {
     dispatch: (action: ActionTypes) => void
 }
 
-export type SidebarType = {}
+type SidebarType = {}
 
 type RootStateType = {
     profilePage: ProfileMessagesType
@@ -50,7 +50,7 @@ type ProfileType = {
     dispatch: (action: ActionTypes) => void
 }
 
-export type StoreType = {
+type StoreType = {
     _state: RootStateType
     _render: () => void
     subscribe: (observer: () => void) => void
