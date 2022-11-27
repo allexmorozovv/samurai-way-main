@@ -2,34 +2,33 @@ import React from "react";
 import {UsersPropsType} from "./UsersContainer";
 import styles from "./Users.module.css"
 
-export const Users = (props:UsersPropsType) => {
 
-
+export const Users = (props: UsersPropsType) => {
     return (
         <div>
-            {
-                props.usersPage.users.map(u=><div key={u.id}>
+            {props.userPage.users.map(el => <div key={el.id}>
+                <span>
+                    <div>
+                        <img src={el.avatar} alt="ava" className={styles.userAvatar}/>
+                    </div>
+                    <div>
+                        {el.followed ? <button onClick={() => {props.unFollow(el.id)}}>Unfollow</button> : <button onClick={() => {props.follow(el.id)
+                        }}>Follow</button>}
+                    </div>
+                </span>
+                <span>
                     <span>
-                        <div>
-                            <img src={u.avatar} alt="ava"className={styles.userAvatar}/>
-                        </div>
-                        <div>
-                            {u.followed? <button onClick={()=>{props.follow(u.id)}} >Unfollow</button >: <button onClick={()=>{props.unfollow(u.id)}} >Follow</button>}
-
-                        </div>
+                        <div>{el.fullName}</div>
+                        <div>{el.status}</div>
                     </span>
+                </span>
+                <span>
                     <span>
-                        <span>
-                            <div>{u.fullName}</div>
-                            <div>{u.status}</div>
-                        </span>
-                        <span>
-                            <div>{u.location.city}</div>
-                            <div>{u.location.country}</div>
-                        </span>
+                        <div>{el.location.city}</div>
+                        <div>{el.location.country}</div>
                     </span>
-                </div>)
-            }
+                </span>
+            </div>)}
         </div>
     )
 }

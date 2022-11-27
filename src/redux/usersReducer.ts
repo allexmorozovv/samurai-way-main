@@ -1,31 +1,19 @@
-import {sendNewMessageTextAC, updateNewMessageTextAC} from "./dialogsReducer";
-import {addPostAC, updateNewPostAC} from "./profileReducer";
-
+type LocationType = {
+    city: string
+    country: string
+}
 export type UserType = {
     id: number
     avatar: string
     followed: boolean
     fullName: string
     status: string
-    location: {
-        city: string
-        country: string
-    }
+    location: LocationType
 }
-
 
 export type UsersPageType = {
     users: Array<UserType>
 }
-
- type ActionTypes =
-    // ReturnType<typeof addPostAC>
-    // | ReturnType<typeof updateNewPostAC>
-    // | ReturnType<typeof updateNewMessageTextAC>
-    // | ReturnType<typeof sendNewMessageTextAC>
-     ReturnType<typeof followAC>
-    | ReturnType<typeof unFollowAC>
-    | ReturnType<typeof setUsersAC>
 
 
 const initialState: UsersPageType = {
@@ -42,57 +30,68 @@ const initialState: UsersPageType = {
             id: 2,
             avatar: "https://avatars.mds.yandex.net/i?id=d2abdba8897217f4f18bba2f1e7c1888-5545903-images-thumbs&n=13",
             followed: false,
-            fullName: "Bob",
+            fullName: "Alex",
             status: "I'm fine",
-            location: {city: "Paris", country: "France"}
+            location: {city: "Rome", country: "Italy"}
         },
         {
             id: 3,
             avatar: "https://avatars.mds.yandex.net/i?id=d2abdba8897217f4f18bba2f1e7c1888-5545903-images-thumbs&n=13",
             followed: true,
-            fullName: "Tom",
+            fullName: "Alex",
             status: "I'm fine",
-            location: {city: "London", country: "England"}
+            location: {city: "Rome", country: "Italy"}
         },
     ]
 }
 
 
-export const usersReducer = (state: UsersPageType = initialState, action: ActionTypes): UsersPageType => {
+export const usersReducer = (state: UsersPageType = initialState, action: userActionType): UsersPageType => {
     switch (action.type) {
-        case  "FOLLOW":
-            return {...state, users: state.users.map(el => el.id === action.userId ? {...el, followed: true} : el)}
-
-
-        case  "UNFOLLOW":
-            return {...state, users: state.users.map(el => el.id === action.userId ? {...el, followed: false} : el)};
-
-
-        case "SET-USERS":
-            return {...state, users:action.users};
-
-
+        case "FOLLOW": {
+            return {
+                ...state,
+                users: state.users.map(el => el.id === action.payload.userId ? {...el, followed: true} : el)
+            }
+        }
+        case "UNFOLLOW": {
+            return {
+                ...state,
+                users: state.users.map(el => el.id === action.payload.userId ? {...el, followed: false} : el)
+            }
+        }
+        case "SET-USERS": {
+            return {...state, users: action.payload.users}
+        }
         default:
             return state
-
     }
 }
+
+type userActionType = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC> | ReturnType<typeof setUsersAC>
 
 export const followAC = (userId: number) => {
     return {
         type: "FOLLOW",
-        userId
+        payload: {
+            userId
+        }
     } as const
 }
+
 export const unFollowAC = (userId: number) => {
     return {
         type: "UNFOLLOW",
-        userId
+        payload: {
+            userId
+        }
     } as const
 }
+
 export const setUsersAC = (users: Array<UserType>) => {
     return {
         type: "SET-USERS",
-        users
+        payload: {users}
     } as const
 }
+

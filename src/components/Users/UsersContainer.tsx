@@ -1,39 +1,42 @@
 import React from "react";
-import {Users} from "./Users";
 import {connect} from "react-redux";
+import {Users} from "./Users";
 import {RootStateType} from "../../redux/reduxStore";
-import {followAC, setUsersAC, unFollowAC, UsersPageType, UserType} from "../../redux/usersReducer";
 import {Dispatch} from "redux";
+import {followAC, setUsersAC, unFollowAC, UsersPageType, UserType} from "../../redux/usersReducer";
 
-export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-type MapStateToPropsType = {
-    usersPage: UsersPageType
+export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
+
+type MapStatePropsType = {
+    userPage: UsersPageType
 }
-type MapDispatchToPropsType = {
+
+type MapDispatchPropsType = {
     follow: (userId: number) => void
-    unfollow: (userId: number) => void
+    unFollow: (userId: number) => void
     setUsers: (users: Array<UserType>) => void
 }
-
-const mapStateToProps = (state: RootStateType):MapStateToPropsType => {
+const mapStateToProps = (state: RootStateType): MapStatePropsType => {
     return {
-        usersPage:state.users
+        userPage: state.usersPage
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+const MapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
         follow: (userId: number) => {
             dispatch(followAC(userId))
         },
-        unfollow: (userId: number) => {
+        unFollow: (userId: number) => {
             dispatch(unFollowAC(userId))
         },
         setUsers: (users: Array<UserType>) => {
             dispatch(setUsersAC(users))
-        },
-
+        }
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+
+export const UsersContainer = connect(mapStateToProps, MapDispatchToProps)(Users)
+
+
