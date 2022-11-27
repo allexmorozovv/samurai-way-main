@@ -17,32 +17,7 @@ export type UsersPageType = {
 
 
 const initialState: UsersPageType = {
-    users: [
-        {
-            id: 1,
-            avatar: "https://avatars.mds.yandex.net/i?id=d2abdba8897217f4f18bba2f1e7c1888-5545903-images-thumbs&n=13",
-            followed: true,
-            fullName: "Alex",
-            status: "I'm fine",
-            location: {city: "Rome", country: "Italy"}
-        },
-        {
-            id: 2,
-            avatar: "https://avatars.mds.yandex.net/i?id=d2abdba8897217f4f18bba2f1e7c1888-5545903-images-thumbs&n=13",
-            followed: false,
-            fullName: "Alex",
-            status: "I'm fine",
-            location: {city: "Rome", country: "Italy"}
-        },
-        {
-            id: 3,
-            avatar: "https://avatars.mds.yandex.net/i?id=d2abdba8897217f4f18bba2f1e7c1888-5545903-images-thumbs&n=13",
-            followed: true,
-            fullName: "Alex",
-            status: "I'm fine",
-            location: {city: "Rome", country: "Italy"}
-        },
-    ]
+    users: []
 }
 
 
