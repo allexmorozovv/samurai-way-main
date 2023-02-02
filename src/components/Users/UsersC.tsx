@@ -6,13 +6,11 @@ import userPhoto from "../../assets/images/user.webp"
 
 export class Users extends React.Component<any,any>{
 
-    constructor(props:any) {
-        super(props);
-            axios.get("https://social-network.samuraijs.com/api/1.0/users")
-                .then(res => {
-                    this.props.setUsers(res.data.items)
-                })
-
+    componentDidMount() {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+            .then(res => {
+                this.props.setUsers(res.data.items)
+            })
     }
 
     render() {
