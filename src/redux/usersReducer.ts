@@ -2,6 +2,7 @@ type LocationType = {
     city: string
     country: string
 }
+
 export type UserType = {
     id: number
     photos: {
@@ -16,13 +17,17 @@ export type UserType = {
 
 export type UsersPageType = {
     users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
-
 
 const initialState: UsersPageType = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 }
-
 
 export const usersReducer = (state: UsersPageType = initialState, action: userActionType): UsersPageType => {
     switch (action.type) {
@@ -41,12 +46,23 @@ export const usersReducer = (state: UsersPageType = initialState, action: userAc
         case "SET-USERS": {
             return {...state, users: action.payload.users}
         }
+        case "SET-CURRENT-PAGE": {
+            return {...state, currentPage: action.payload.currentPage}
+        }
+        case "SET-TOTAL-USERS-COUNT": {
+            return {...state, totalUsersCount: action.payload.totalUsersCount}
+        }
         default:
             return state
     }
 }
 
-type userActionType = ReturnType<typeof followAC> | ReturnType<typeof unFollowAC> | ReturnType<typeof setUsersAC>
+type userActionType =
+    ReturnType<typeof followAC>
+    | ReturnType<typeof unFollowAC>
+    | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setTotalUsersCountAC>
 
 export const followAC = (userId: number) => {
     return {
@@ -56,20 +72,28 @@ export const followAC = (userId: number) => {
         }
     } as const
 }
-
 export const unFollowAC = (userId: number) => {
     return {
         type: "UNFOLLOW",
-        payload: {
-            userId
-        }
+        payload: {userId}
     } as const
 }
-
 export const setUsersAC = (users: Array<UserType>) => {
     return {
         type: "SET-USERS",
         payload: {users}
+    } as const
+}
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: "SET-CURRENT-PAGE",
+        payload: {currentPage}
+    } as const
+}
+export const setTotalUsersCountAC = (totalUsersCount: number) => {
+    return {
+        type: "SET-TOTAL-USERS-COUNT",
+        payload: {totalUsersCount}
     } as const
 }
 
