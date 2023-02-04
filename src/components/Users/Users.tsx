@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/user.webp";
-import {UsersPageType, UserType} from "../../redux/usersReducer";
+import { UserType} from "../../redux/usersReducer";
 
 type UsersPropsType={
     users:Array<UserType>
@@ -10,7 +10,6 @@ type UsersPropsType={
     onPageChanged:(pageNumber: number)=>void
     follow:(id:number)=>void
     unfollow:(id:number)=>void
-    userPage: UsersPageType
     currentPage:number
 }
 
@@ -33,7 +32,7 @@ export const Users = (props:UsersPropsType) => {
                 })}
             </div>
 
-            {props.userPage.users.map((el: any) => <div key={el.id}>
+            {props.users.map((el: any) => <div key={el.id}>
                 <span>
                     <div>
                         <img src={el.photos.small != null ? el.photos.small : userPhoto} alt="ava"
