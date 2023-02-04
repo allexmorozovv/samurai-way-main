@@ -1,33 +1,47 @@
 import React from "react";
-import styles from "./Users.module.css"
-import {UsersPropsType} from "./UsersContainer";
-import axios from "axios";
-import userPhoto from "../../assets/images/user.webp"
+import styles from "./Users.module.css";
+import userPhoto from "../../assets/images/user.webp";
+import {UsersPageType, UserType} from "../../redux/usersReducer";
 
+type UsersPropsType={
+    users:Array<UserType>
+    totalUsersCount:number
+    pageSize:number
+    onPageChanged:(pageNumber: number)=>void
+    follow:(id:number)=>void
+    unfollow:(id:number)=>void
+    userPage: UsersPageType
+    currentPage:number
+}
 
-export const Users = (props: UsersPropsType) => {
-
-    const getUsers = () => {
-        if (props.userPage.users.length === 0) {
-
-            axios.get("https://social-network.samuraijs.com/api/1.0/users")
-                .then(res => {
-                    props.setUsers(res.data.items)
-                })
-        }
+export const Users = (props:UsersPropsType) => {
+    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    const pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
     }
-
     return (
         <div>
-            <button onClick={getUsers}>Get Users</button>
-            {props.userPage.users.map(el => <div key={el.id}>
+            <div>
+                {pages.map(p => {
+
+                    // @ts-ignore
+                    return <span className={props.currentPage === p && styles.selectedPage}
+                                 onClick={(e) => {
+                                     props.onPageChanged(p)
+                                 }}>{p}</span>
+                })}
+            </div>
+
+            {props.userPage.users.map((el: any) => <div key={el.id}>
                 <span>
                     <div>
-                        <img src={el.photos.small!=null?el.photos.small:userPhoto} alt="ava" className={styles.userAvatar}/>
+                        <img src={el.photos.small != null ? el.photos.small : userPhoto} alt="ava"
+                             className={styles.userAvatar}/>
                     </div>
                     <div>
                         {el.followed ? <button onClick={() => {
-                            props.unFollow(el.id)
+                           props.unfollow(el.id)
                         }}>Unfollow</button> : <button onClick={() => {
                             props.follow(el.id)
                         }}>Follow</button>}
