@@ -1,4 +1,4 @@
-import {addPostAC, profileReducer, updateNewPostAC} from "./profileReducer";
+// import {addPostAC, profileReducer, updateNewPostAC} from "./profileReducer";
 import {dialogsReducer, sendNewMessageTextAC, updateNewMessageTextAC} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 
@@ -21,6 +21,7 @@ type PostType = {
 type ProfileMessagesType = {
     newPostText: string
     posts: Array<PostType>
+
 }
 
 type DialogsPageType = {
@@ -63,8 +64,8 @@ type MainStateType = {
 }
 
 type ActionTypes =
-    ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostAC>
+    // ReturnType<typeof addPostAC>
+    // | ReturnType<typeof updateNewPostAC>
     | ReturnType<typeof updateNewMessageTextAC>
     | ReturnType<typeof sendNewMessageTextAC>
 
@@ -78,7 +79,8 @@ const store: StoreType = {
                 {id: 2, message: "It's my first post", likesCount: 25},
                 {id: 3, message: "Yo!", likesCount: 15},
                 {id: 4, message: "Yo!", likesCount: 15},
-            ]
+            ],
+
         },
         dialogsPage: {
             dialogs: [
@@ -112,7 +114,7 @@ const store: StoreType = {
 
     dispatch(action) {
 
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        // this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._state.sidebar = sidebarReducer(this._state.sidebar, action)
 
