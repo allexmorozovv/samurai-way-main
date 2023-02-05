@@ -6,14 +6,26 @@ import {
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
-    toggleIsFetching, unFollow,
+    toggleIsFetching,  unFollow,
     UserType
 } from "../../redux/usersReducer";
 import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 
-export class UserContainer extends React.Component<any, any> {
+// type UsersContainerPropsType={
+//     users: Array<UserType>,
+//     follow: (id: number) => void,
+//     unfollow: (id: number) => void
+//     setCurrentPage: (currentPage: number) => void
+//     pageSize: number,
+//     totalUsersCount: number,
+//     currentPage: number,
+//     isFetching: boolean,
+//     toggleIsFetching:toggleIsFetchingType?
+// }
+
+ class UsersContainer extends React.Component<any, {}> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
@@ -70,7 +82,7 @@ const mapStateToProps = (state: RootStateType): MapStatePropsType => {
 }
 
 
-export const UsersContainer = connect(mapStateToProps, {
+export default connect(mapStateToProps, {
     follow,
     unFollow,
     setUsers,
@@ -78,6 +90,6 @@ export const UsersContainer = connect(mapStateToProps, {
     setTotalUsersCount,
     toggleIsFetching
 
-})(UserContainer)
+})(UsersContainer)
 
 
