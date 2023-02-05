@@ -6,7 +6,7 @@ import {MyPostsPropsType} from "./MyPostsContainer";
 
 export const MyPosts = (props:MyPostsPropsType) => {
 
-    let postsElements = props.profilePage.posts.map(p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
+    let postsElements = props.profilePage.posts.map(p => <Post id={p.id} key={p.id}message={p.message} likesCount={p.likesCount}/>)
 
     const addPostHandler = () => {
         props.addPost()
