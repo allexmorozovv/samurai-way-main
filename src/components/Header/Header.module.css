@@ -3,6 +3,15 @@
     background-color: darkcyan;
 }
 
-.header img{
+.header img {
     width: 30px;
+}
+
+.loginBlock {
+    float: right;
+    margin-right: 10px;
+}
+.loginBlock
+a {
+    color: white;
 }
