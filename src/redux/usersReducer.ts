@@ -73,9 +73,7 @@ type userActionType =
 export const follow = (userId: number) => {
     return {
         type: "FOLLOW",
-        payload: {
-            userId
-        }
+        payload: {userId}
     } as const
 }
 export const unFollow = (userId: number) => {

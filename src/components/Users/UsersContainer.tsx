@@ -6,12 +6,12 @@ import {
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
-    toggleIsFetching,  unFollow,
+    toggleIsFetching, unFollow,
     UserType
 } from "../../redux/usersReducer";
-import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
+import {getUsers} from "../../api/api";
 
 // type UsersContainerPropsType={
 //     users: Array<UserType>,
@@ -25,25 +25,25 @@ import {Preloader} from "../common/Preloader/Preloader";
 //     toggleIsFetching:toggleIsFetchingType?
 // }
 
- class UsersContainer extends React.Component<any, {}> {
+class UsersContainer extends React.Component<any, {}> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{withCredentials:true})
-            .then(res => {
+        getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(res.data.items)
-                this.props.setTotalUsersCount(res.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
             })
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber);
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,{withCredentials:true})
-            .then(res => {
+        getUsers(pageNumber, this.props.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(res.data.items)
+                this.props.setUsers(data.items)
             })
     }
 
@@ -55,7 +55,7 @@ import {Preloader} from "../common/Preloader/Preloader";
                    onPageChanged={this.onPageChanged}
                    users={this.props.users}
                    follow={this.props.follow}
-                   unfollow={this.props.unfollow}
+                   unFollow={this.props.unFollow}
                    currentPage={this.props.currentPage}
             />
         </>
@@ -89,7 +89,6 @@ export default connect(mapStateToProps, {
     setCurrentPage,
     setTotalUsersCount,
     toggleIsFetching
-
 })(UsersContainer)
 
 

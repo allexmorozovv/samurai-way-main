@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/user.webp";
-import {UserType} from "../../redux/usersReducer";
+import {unFollow, UserType} from "../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
 
@@ -11,7 +11,7 @@ type UsersPropsType = {
     pageSize: number
     onPageChanged: (pageNumber: number) => void
     follow: (id: number) => void
-    unfollow: (id: number) => void
+    unFollow: (id: number) => void
     currentPage: number
 }
 
@@ -56,7 +56,8 @@ export const Users = (props: UsersPropsType) => {
                             )
                                 .then(res => {
                                     if (res.data.resultCode === 0) {
-                                        props.unfollow(el.id)
+
+                                        props.unFollow(el.id)
                                     }
                                 })
 
@@ -71,13 +72,17 @@ export const Users = (props: UsersPropsType) => {
                             )
                                 .then(res => {
                                     if (res.data.resultCode === 0) {
+
                                         props.follow(el.id)
                                     }
                                 })
-
-
                         }}>Follow</button>}
                     </div>
+                    {/*<div>*/}
+                    {/*     {el.followed*/}
+                    {/*         ? <button onClick={() => {props.unFollow(el.id)}}>unfollow</button>*/}
+                    {/*         : <button onClick={() => {props.follow(el.id)}}>follow</button>}*/}
+                    {/*</div>*/}
                 </span>
                 <span>
                     <span>
