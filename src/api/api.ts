@@ -13,11 +13,14 @@ export const usersAPI = {
         })
     },
     follow(userId: number) {
-        return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
+        return instance.post(`follow/${userId}`)
     },
     unFollow(userId: number) {
-        return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
+        return instance.delete(`follow/${userId}`)
     },
+    getProfile(userId: string){
+        return instance.get(`profile/` + userId)
+    }
     // getProfile(userId: string) {
     //     console.warn('Old method. Please use ProfileAPO object')
     //     return profileAPI.getProfile(userId)
@@ -26,7 +29,11 @@ export const usersAPI = {
 
 
 
-
+export const authAPI={
+    getMe(){
+        return instance.get(`auth/me`)
+    }
+}
 
 
 

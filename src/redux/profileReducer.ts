@@ -1,4 +1,6 @@
 import {sendNewMessageTextAC, updateNewMessageTextAC} from "./dialogsReducer";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 export type PostType = {
     id: number
@@ -91,3 +93,13 @@ export const setUserProfile = (profile: ProfileType) => {
         payload: {profile}
     } as const
 }
+
+export const getUserProfile = (userId:string)=>{
+    return (dispatch:Dispatch)=>{
+        usersAPI.getProfile(userId)
+            .then(res => {
+                dispatch(setUserProfile(res.data))
+            })
+    }
+}
+

@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {authAPI} from "../api/api";
+
 export type AuthPageType = {
     userId: number | null,
     email: string | null,
@@ -34,5 +37,16 @@ export const setAuthUserData = (userId: number | null, email: string | null, log
             email,
         }
     } as const
+}
+export const getAuthUserData = () => {
+    return (dispatch: Dispatch)=>{
+        authAPI.getMe()
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    let {id, email, login} = res.data.data
+                    dispatch(setAuthUserData(id, email, login))
+                }
+            })
+    }
 }
 
