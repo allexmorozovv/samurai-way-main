@@ -30,7 +30,7 @@ export type ProfileType = {
 }
 
 export type ProfilePageType = {
-    newPostText: string
+
     posts: Array<PostType>
     profile: ProfileType | null
     status: string
@@ -38,13 +38,12 @@ export type ProfilePageType = {
 
 export type ActionTypes =
     ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostAC>
     | ReturnType<typeof sendNewMessageTextAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatusAC>
 
 const initialState: ProfilePageType = {
-    newPostText: '',
+
     posts: [
         {id: 1, message: "Hi, how are you", likesCount: 15},
         {id: 2, message: "It's my first post", likesCount: 25},
@@ -61,12 +60,10 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
         case  "ADD-POST":
             const newPost: PostType = {
                 id: new Date().getTime(),
-                message: state.newPostText,
+                message: action.payload.newPostText,
                 likesCount: 0
             }
-            return {...state, posts: [...state.posts, newPost], newPostText: ""};
-        case "UPDATE-NEW-POST-TEXT":
-            return {...state, newPostText: action.payload.newText}
+            return {...state, posts: [...state.posts, newPost]};
         case "SET-USERS-PROFILE": {
             return {...state, profile: action.payload.profile}
         }
@@ -78,17 +75,10 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
     }
 }
 
-export const addPostAC = () => {
+export const addPostAC = (newPostText:string) => {
     return {
         type: "ADD-POST",
-
-    } as const
-}
-
-export const updateNewPostAC = (newText: string) => {
-    return {
-        type: "UPDATE-NEW-POST-TEXT",
-        payload: {newText}
+        payload: {newPostText}
     } as const
 }
 

@@ -1,4 +1,4 @@
-import {addPostAC, updateNewPostAC} from "./profileReducer";
+import {addPostAC} from "./profileReducer";
 
 export type MessageType = {
     id: number
@@ -14,7 +14,6 @@ export type DialogsPageType = typeof initialState
 
 export type ActionTypes =
     ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostAC>
     | ReturnType<typeof sendNewMessageTextAC>
 
 
