@@ -1,4 +1,4 @@
-import {sendNewMessageTextAC, updateNewMessageTextAC} from "./dialogsReducer";
+import {sendNewMessageTextAC} from "./dialogsReducer";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 
@@ -39,7 +39,6 @@ export type ProfilePageType = {
 export type ActionTypes =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof updateNewPostAC>
-    | ReturnType<typeof updateNewMessageTextAC>
     | ReturnType<typeof sendNewMessageTextAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatusAC>

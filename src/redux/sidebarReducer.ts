@@ -1,10 +1,9 @@
 import {addPostAC, updateNewPostAC} from "./profileReducer";
-import {sendNewMessageTextAC, updateNewMessageTextAC} from "./dialogsReducer";
+import {sendNewMessageTextAC} from "./dialogsReducer";
 
 export type ActionTypes =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof updateNewPostAC>
-    | ReturnType<typeof updateNewMessageTextAC>
     | ReturnType<typeof sendNewMessageTextAC>
 
 export type SidebarType = {}
