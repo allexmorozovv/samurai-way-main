@@ -23,7 +23,7 @@ export const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={s.messages}>
                 <div>{messagesElements}</div>
-                <ReduxAddMessageForm onSubmit={addNewMessage}/>
+                <AddMessageReduxForm onSubmit={addNewMessage}/>
             </div>
         </div>
     )
@@ -43,4 +43,4 @@ const AddMessageForm = (props: InjectedFormProps<AddMessageFormType>) => {
         </div>
     </form>
 }
-const ReduxAddMessageForm = reduxForm<AddMessageFormType>({form: "dialogAddMessageForm"})(AddMessageForm)
+const AddMessageReduxForm = reduxForm<AddMessageFormType>({form: "dialogAddMessageForm"})(AddMessageForm)
