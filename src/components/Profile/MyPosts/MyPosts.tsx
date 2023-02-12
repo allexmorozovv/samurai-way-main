@@ -3,6 +3,8 @@ import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import {MyPostsPropsType} from "./MyPostsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthCreator, requiredFields} from "../../../utils/validators/validators";
+import {Textarea} from "../../common/FormsControls/FormControls";
 
 
 export const MyPosts = (props: MyPostsPropsType) => {
@@ -31,11 +33,13 @@ export const MyPosts = (props: MyPostsPropsType) => {
 type AddNewPostFormFormType = {
     newPostText: string
 }
+const maxLength10 = maxLengthCreator(10)
 
 const AddNewPostForm = (props: InjectedFormProps<AddNewPostFormFormType>) => {
     return <form onSubmit={props.handleSubmit}>
         <div>
-            <Field component={"textarea"} name={"newPostText"} placeholder={"Add your post"}/>
+            <Field component={Textarea} name={"newPostText"} placeholder={"Add your post"}
+                   validate={[requiredFields, maxLength10]}/>
         </div>
         <div>
             <button>Add post</button>
