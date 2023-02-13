@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 export type AuthPageType = {
     userId: number | null,
@@ -57,6 +58,8 @@ export const login = (email: string, password: string, rememberMe: boolean = fal
             .then(res => {
                 if (res.data.resultCode === 0) {
                     dispatch(getAuthUserData())
+                } else {
+                    dispatch(stopSubmit('login', {_error: res.data.messages.length > 0 ? res.data.messages[0] : 'Wrong email or password'}))
                 }
             })
     }

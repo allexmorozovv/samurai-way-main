@@ -6,6 +6,7 @@ import {login} from "../../redux/authReducer";
 import {connect} from "react-redux";
 import {RootStateType} from "../../redux/reduxStore";
 import {Redirect} from "react-router-dom";
+import styles from "../common/FormsControls/FormControl.module.css"
 
 type FormType = {
     email: string
@@ -21,11 +22,15 @@ const LoginForm = (props: InjectedFormProps<FormType>) => {
                 <Field placeholder={'Email'} name={'email'} validate={[requiredFields]} component={Input}/>
             </div>
             <div>
-                <Field placeholder={'Password'} name={'password'} type={'password'} validate={[requiredFields]} component={Input}/>
+                <Field placeholder={'Password'} name={'password'} type={'password'} validate={[requiredFields]}
+                       component={Input}/>
             </div>
             <div>
                 <Field type={'checkbox'} name={'rememberMe'} component={Input}/> remember me
             </div>
+            {props.error && <div className={styles.formSummaryError}>
+                {props.error}
+            </div>}
             <div>
                 <button>Login</button>
 
@@ -45,7 +50,6 @@ type MapDispatchToPropsType = {
 }
 
 type LoginPropsType = MapStateToPropsType & MapDispatchToPropsType
-
 
 
 const Login = (props: LoginPropsType) => {
