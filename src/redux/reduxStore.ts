@@ -7,6 +7,7 @@ import {legacy_createStore as createStore} from 'redux'
 import {authReducer} from "./authReducer";
 import thunk from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
+import {appReducer} from "./appReducer";
 
 
 let rootReducer = combineReducers({
@@ -15,6 +16,7 @@ let rootReducer = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
+    app:appReducer,
     form: formReducer
 })
 
