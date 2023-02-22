@@ -7,35 +7,28 @@ import {maxLengthCreator, requiredFields} from "../../../utils/validators/valida
 import {Textarea} from "../../common/FormsControls/FormControls";
 
 
-export class MyPosts extends React.PureComponent<MyPostsPropsType> {
+export const MyPosts = React.memo((props: MyPostsPropsType) => {
 
-    shouldComponentUpdate(nextProps: Readonly<MyPostsPropsType>, nextState: Readonly<{}>): boolean {
-        return nextProps !== this.props || nextState !== this.state
+    let postsElements = props.profilePage.posts.map(p => <Post id={p.id} key={p.id} message={p.message}
+                                                               likesCount={p.likesCount}/>)
+
+    const addPost = (values: AddNewPostFormFormType) => {
+        props.addPost(values.newPostText)
+        values.newPostText = ''
     }
 
-    render() {
-
-        let postsElements = this.props.profilePage.posts.map(p => <Post id={p.id} key={p.id} message={p.message}
-                                                                        likesCount={p.likesCount}/>)
-
-        const addPost = (values: AddNewPostFormFormType) => {
-            this.props.addPost(values.newPostText)
-            values.newPostText = ''
-        }
-
-        return (
-            <div className={s.content}>
-                <div className={s.postsBlock}>
-                    <h3>My posts</h3>
-                    <AddNewPostReduxForm onSubmit={addPost}/>
-                    <div className={s.posts}>
-                        {postsElements}
-                    </div>
+    return (
+        <div className={s.content}>
+            <div className={s.postsBlock}>
+                <h3>My posts</h3>
+                <AddNewPostReduxForm onSubmit={addPost}/>
+                <div className={s.posts}>
+                    {postsElements}
                 </div>
             </div>
-        )
-    }
-}
+        </div>
+    )
+});
 
 type AddNewPostFormFormType = {
     newPostText: string
